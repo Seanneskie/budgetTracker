@@ -1,0 +1,32 @@
+@page
+@model BudgetSystem.Web.Pages.Transactions.IndexModel
+@{
+    ViewData["Title"] = "Transactions";
+}
+<h1 class="mt-3">Transactions</h1>
+
+<p>
+    <a class="btn btn-primary" asp-page="Create">Create Transaction</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var t in Model.Transactions)
+    {
+        <tr>
+            <td>@t.Id</td>
+            <td>@t.Date.ToLocalTime()</td>
+            <td>@t.Amount</td>
+            <td>@t.Type</td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -28,6 +28,13 @@ public class ApiClient
     public async Task<List<CategoryVm>> GetCategoriesAsync()
         => await _http.GetFromJsonAsync<List<CategoryVm>>("/api/v1/categories") ?? new();
 
+    // Transactions
+    public async Task<List<TransactionVm>> GetTransactionsAsync()
+        => await _http.GetFromJsonAsync<List<TransactionVm>>("/api/v1/transactions") ?? new();
+
+    public async Task<int> CreateTransactionAsync(TransactionCreateDto dto)
+    {
+        var resp = await _http.PostAsJsonAsync("/api/v1/transactions", dto);
     public async Task<int> CreateCategoryAsync(CategoryCreateDto dto)
     {
         var resp = await _http.PostAsJsonAsync("/api/v1/categories", dto);
@@ -48,6 +55,10 @@ public class ApiClient
     private record CreatedId(int Id);
     public record AccountVm(int Id, string Name, decimal StartingBalance, string Currency, DateTime CreatedUtc, DateTime? UpdatedUtc);
     public record AccountCreateDto(string Name, decimal StartingBalance, string Currency = "PHP");
+    public record CategoryVm(int Id, string Name, TransactionType Type, int? AccountId, bool IsArchived, DateTime CreatedUtc, DateTime? UpdatedUtc);
+    public enum TransactionType { Income, Expense, Transfer }
+    public record TransactionVm(int Id, DateTime Date, decimal Amount, TransactionType Type, string? Notes, int AccountId, int? CategoryId, int? FromAccountId, int? ToAccountId, DateTime CreatedUtc, DateTime? UpdatedUtc);
+    public record TransactionCreateDto(DateTime Date, decimal Amount, TransactionType Type, int AccountId, int? CategoryId = null, int? FromAccountId = null, int? ToAccountId = null, string? Notes = null);
 
     public record CategoryVm(int Id, string Name, TransactionType Type, int? AccountId, bool IsArchived, DateTime CreatedUtc, DateTime? UpdatedUtc);
     public record CategoryCreateDto(string Name, TransactionType Type, int? AccountId);

@@ -1,0 +1,57 @@
+@page
+@using BudgetSystem.Client
+@model BudgetSystem.Web.Pages.Transactions.CreateModel
+@{
+    ViewData["Title"] = "Create Transaction";
+}
+
+<h1>Create Transaction</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Form.Date" class="form-label"></label>
+        <input asp-for="Form.Date" class="form-control" />
+        <span asp-validation-for="Form.Date" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Form.Amount" class="form-label"></label>
+        <input asp-for="Form.Amount" class="form-control" />
+        <span asp-validation-for="Form.Amount" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Form.Type" class="form-label"></label>
+        <select asp-for="Form.Type" class="form-select" asp-items="Html.GetEnumSelectList<ApiClient.TransactionType>()"></select>
+        <span asp-validation-for="Form.Type" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Form.AccountId" class="form-label"></label>
+        <select asp-for="Form.AccountId" class="form-select" asp-items="Model.AccountOptions"></select>
+        <span asp-validation-for="Form.AccountId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Form.CategoryId" class="form-label"></label>
+        <select asp-for="Form.CategoryId" class="form-select" asp-items="Model.CategoryOptions">
+            <option value="">-- None --</option>
+        </select>
+        <span asp-validation-for="Form.CategoryId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Form.FromAccountId" class="form-label"></label>
+        <select asp-for="Form.FromAccountId" class="form-select" asp-items="Model.AccountOptions">
+            <option value="">-- None --</option>
+        </select>
+        <span asp-validation-for="Form.FromAccountId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Form.ToAccountId" class="form-label"></label>
+        <select asp-for="Form.ToAccountId" class="form-select" asp-items="Model.AccountOptions">
+            <option value="">-- None --</option>
+        </select>
+        <span asp-validation-for="Form.ToAccountId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
