@@ -1,0 +1,30 @@
+@page
+@model BudgetSystem.Web.Pages.Accounts.CreateModel
+@{
+    ViewData["Title"] = "Create Account";
+}
+
+<h1>Create Account</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Form.Name" class="form-label"></label>
+        <input asp-for="Form.Name" class="form-control" />
+        <span asp-validation-for="Form.Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Form.StartingBalance" class="form-label"></label>
+        <input asp-for="Form.StartingBalance" class="form-control" />
+        <span asp-validation-for="Form.StartingBalance" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Form.Currency" class="form-label"></label>
+        <input asp-for="Form.Currency" class="form-control" />
+        <span asp-validation-for="Form.Currency" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
