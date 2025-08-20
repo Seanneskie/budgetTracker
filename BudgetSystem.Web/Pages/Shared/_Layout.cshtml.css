@@ -39,13 +39,6 @@ button.accept-policy {
   line-height: inherit;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
-}
 
 .card { border-radius: 0.75rem; }
 .card .form-label { font-weight: 600; }
