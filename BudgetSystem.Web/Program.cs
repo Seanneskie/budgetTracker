@@ -3,6 +3,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+// Typed HttpClient used by the Razor pages to talk to the API
+builder.Services.AddHttpClient<ApiClient>(client =>
+{
+    var baseUrl = builder.Configuration["Api:BaseUrl"]
+                  ?? throw new InvalidOperationException("Api:BaseUrl missing");
+    client.BaseAddress = new Uri(baseUrl);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

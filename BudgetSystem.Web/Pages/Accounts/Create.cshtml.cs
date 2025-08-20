@@ -3,27 +3,30 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BudgetSystem.Web.Pages.Accounts;
 
-public class CreateModel(ApiClient api) : PageModel
+public class CreateModel : PageModel
 {
-    [BindProperty] public CreateAccountForm Form { get; set; } = new();
+    private readonly ApiClient _api;
 
-    public void OnGet() {}
+    [BindProperty]
+    public ApiClient.AccountCreateDto Form { get; set; } = new("", 0m);
+
+    public CreateModel(ApiClient api)
+    {
+        _api = api;
+    }
+
+    public void OnGet()
+    {
+    }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid) return Page();
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
 
-        var id = await api.CreateAccountAsync(
-            new ApiClient.AccountCreateDto(Form.Name, Form.StartingBalance, Form.Currency ?? "PHP"));
-
-        TempData["Message"] = $"Created account #{id}";
-        return RedirectToPage("Index");
-    }
-
-    public class CreateAccountForm
-    {
-        public string Name { get; set; } = string.Empty;
-        public decimal StartingBalance { get; set; }
-        public string? Currency { get; set; } = "PHP";
+        await _api.CreateAccountAsync(Form);
+        return RedirectToPage("/Index");
     }
 }
