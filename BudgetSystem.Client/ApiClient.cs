@@ -28,6 +28,9 @@ public class ApiClient
     public async Task<List<CategoryVm>> GetCategoriesAsync()
         => await _http.GetFromJsonAsync<List<CategoryVm>>("/api/v1/categories") ?? new();
 
+    public async Task<int> CreateCategoryAsync(CategoryCreateDto dto)
+    {
+        var resp = await _http.PostAsJsonAsync("/api/v1/categories", dto);
     // Budgets
     public async Task<List<BudgetVm>> GetBudgetsAsync()
         => await _http.GetFromJsonAsync<List<BudgetVm>>("/api/v1/budgets") ?? new();
@@ -44,6 +47,15 @@ public class ApiClient
     private record CreatedId(int Id);
     public record AccountVm(int Id, string Name, decimal StartingBalance, string Currency, DateTime CreatedUtc, DateTime? UpdatedUtc);
     public record AccountCreateDto(string Name, decimal StartingBalance, string Currency = "PHP");
+
+    public record CategoryVm(int Id, string Name, TransactionType Type, int? AccountId, bool IsArchived, DateTime CreatedUtc, DateTime? UpdatedUtc);
+    public record CategoryCreateDto(string Name, TransactionType Type, int? AccountId);
+    public enum TransactionType
+    {
+        Income = 1,
+        Expense = 2,
+        Transfer = 3
+    }
     public record CategoryVm(int Id, string Name, int Type, int? AccountId, bool IsArchived, DateTime CreatedUtc, DateTime? UpdatedUtc);
     public record BudgetVm(int Id, int Year, int Month, decimal LimitAmount, int AccountId, int? CategoryId, DateTime CreatedUtc, DateTime? UpdatedUtc);
     public record BudgetCreateDto(int Year, int Month, decimal LimitAmount, int AccountId, int? CategoryId);
