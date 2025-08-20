@@ -19,12 +19,18 @@
           <form method="post" novalidate>
             <div class="mb-3">
               <label asp-for="Form.Date" class="form-label"></label>
-              <input asp-for="Form.Date" class="form-control" />
+              <input asp-for="Form.Date" class="form-control" type="datetime-local" />
               <span asp-validation-for="Form.Date" class="text-danger small"></span>
             </div>
             <div class="mb-3">
               <label asp-for="Form.Amount" class="form-label"></label>
-              <input asp-for="Form.Amount" class="form-control" />
+              <div class="input-group">
+                <span class="input-group-text" id="curPrefix">₱</span>
+                <input asp-for="Form.Amount"
+                       class="form-control"
+                       type="number" step="0.01" min="0" aria-describedby="curPrefix"
+                       placeholder="0.00" />
+              </div>
               <span asp-validation-for="Form.Amount" class="text-danger small"></span>
             </div>
             <div class="mb-3">

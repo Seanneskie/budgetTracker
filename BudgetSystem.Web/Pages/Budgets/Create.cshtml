@@ -28,7 +28,13 @@
             </div>
             <div class="mb-3">
               <label asp-for="Form.LimitAmount" class="form-label"></label>
-              <input asp-for="Form.LimitAmount" class="form-control" />
+              <div class="input-group">
+                <span class="input-group-text" id="curPrefix">₱</span>
+                <input asp-for="Form.LimitAmount"
+                       class="form-control"
+                       type="number" step="0.01" min="0" aria-describedby="curPrefix"
+                       placeholder="0.00" />
+              </div>
               <span asp-validation-for="Form.LimitAmount" class="text-danger small"></span>
             </div>
             <div class="mb-3">
