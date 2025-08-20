@@ -24,7 +24,27 @@ public class ApiClient
         return payload?.Id ?? 0;
     }
 
+    // Categories
+    public async Task<List<CategoryVm>> GetCategoriesAsync()
+        => await _http.GetFromJsonAsync<List<CategoryVm>>("/api/v1/categories") ?? new();
+
+    // Budgets
+    public async Task<List<BudgetVm>> GetBudgetsAsync()
+        => await _http.GetFromJsonAsync<List<BudgetVm>>("/api/v1/budgets") ?? new();
+
+    public async Task<int> CreateBudgetAsync(BudgetCreateDto dto)
+    {
+        var resp = await _http.PostAsJsonAsync("/api/v1/budgets", dto);
+        if (!resp.IsSuccessStatusCode)
+            throw new HttpRequestException($"Create failed: {(int)resp.StatusCode} {resp.ReasonPhrase}");
+        var payload = await resp.Content.ReadFromJsonAsync<CreatedId>();
+        return payload?.Id ?? 0;
+    }
+
     private record CreatedId(int Id);
     public record AccountVm(int Id, string Name, decimal StartingBalance, string Currency, DateTime CreatedUtc, DateTime? UpdatedUtc);
     public record AccountCreateDto(string Name, decimal StartingBalance, string Currency = "PHP");
+    public record CategoryVm(int Id, string Name, int Type, int? AccountId, bool IsArchived, DateTime CreatedUtc, DateTime? UpdatedUtc);
+    public record BudgetVm(int Id, int Year, int Month, decimal LimitAmount, int AccountId, int? CategoryId, DateTime CreatedUtc, DateTime? UpdatedUtc);
+    public record BudgetCreateDto(int Year, int Month, decimal LimitAmount, int AccountId, int? CategoryId);
 }

@@ -1,0 +1,43 @@
+@page
+@model BudgetSystem.Web.Pages.Budgets.CreateModel
+@{
+    ViewData["Title"] = "Create Budget";
+}
+
+<h1>Create Budget</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Form.Year" class="form-label"></label>
+        <input asp-for="Form.Year" class="form-control" />
+        <span asp-validation-for="Form.Year" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Form.Month" class="form-label"></label>
+        <input asp-for="Form.Month" class="form-control" />
+        <span asp-validation-for="Form.Month" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Form.LimitAmount" class="form-label"></label>
+        <input asp-for="Form.LimitAmount" class="form-control" />
+        <span asp-validation-for="Form.LimitAmount" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Form.AccountId" class="form-label"></label>
+        <select asp-for="Form.AccountId" class="form-select" asp-items="Model.Accounts"></select>
+        <span asp-validation-for="Form.AccountId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Form.CategoryId" class="form-label"></label>
+        <select asp-for="Form.CategoryId" class="form-select" asp-items="Model.Categories">
+            <option value="">-- None --</option>
+        </select>
+        <span asp-validation-for="Form.CategoryId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
