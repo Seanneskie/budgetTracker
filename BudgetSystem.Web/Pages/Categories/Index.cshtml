@@ -13,13 +13,11 @@
 
     @if (Model.Categories is null || !Model.Categories.Any())
     {
-        <tr>
-            <td>@c.Id</td>
-            <td>@c.Name</td>
-            <td>@c.Type</td>
-            <td>@c.AccountName</td>
-            <td>@c.CreatedUtc.ToLocalTime()</td>
-        </tr>
+        <div class="card-body text-center text-muted py-5">
+            <p class="mb-1 fw-semibold">No categories yet</p>
+            <p class="mb-3">Create your first category to get started.</p>
+            <a class="btn btn-outline-primary btn-sm" asp-page="Create">Create Category</a>
+        </div>
     }
     else
     {
@@ -37,7 +35,7 @@
             <tbody>
             @foreach (var c in Model.Categories)
             {
-                var type = c.Type?.ToString() ?? "";
+                var type = c.Type.ToString();
                 var badgeClass = type.Equals("Expense", StringComparison.OrdinalIgnoreCase) ? "text-bg-danger"
                                : type.Equals("Income", StringComparison.OrdinalIgnoreCase)  ? "text-bg-success"
                                : "text-bg-secondary";
@@ -54,9 +52,13 @@
                         {
                             <span class="badge text-bg-light border">@c.AccountName</span>
                         }
-                        else
+                        else if (c.AccountId.HasValue)
                         {
                             <span class="badge text-bg-light border">#@c.AccountId</span>
+                        }
+                        else
+                        {
+                            <span class="badge text-bg-light border">&mdash;</span>
                         }
                     </td>
                     <td class="text-nowrap">
