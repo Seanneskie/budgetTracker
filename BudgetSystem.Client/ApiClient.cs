@@ -31,6 +31,14 @@ public class ApiClient
     public async Task<int> CreateCategoryAsync(CategoryCreateDto dto)
     {
         var resp = await _http.PostAsJsonAsync("/api/v1/categories", dto);
+
+    // Budgets
+    public async Task<List<BudgetVm>> GetBudgetsAsync()
+        => await _http.GetFromJsonAsync<List<BudgetVm>>("/api/v1/budgets") ?? new();
+
+    public async Task<int> CreateBudgetAsync(BudgetCreateDto dto)
+    {
+        var resp = await _http.PostAsJsonAsync("/api/v1/budgets", dto);
         if (!resp.IsSuccessStatusCode)
             throw new HttpRequestException($"Create failed: {(int)resp.StatusCode} {resp.ReasonPhrase}");
         var payload = await resp.Content.ReadFromJsonAsync<CreatedId>();
@@ -49,4 +57,8 @@ public class ApiClient
         Expense = 2,
         Transfer = 3
     }
+
+    public record CategoryVm(int Id, string Name, int Type, int? AccountId, bool IsArchived, DateTime CreatedUtc, DateTime? UpdatedUtc);
+    public record BudgetVm(int Id, int Year, int Month, decimal LimitAmount, int AccountId, int? CategoryId, DateTime CreatedUtc, DateTime? UpdatedUtc);
+    public record BudgetCreateDto(int Year, int Month, decimal LimitAmount, int AccountId, int? CategoryId);
 }
