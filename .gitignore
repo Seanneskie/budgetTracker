@@ -1,0 +1,17 @@
+# Build output
+**/bin/
+**/obj/
+# VS/IDE
+.vs/
+.vscode/
+*.user
+*.suo
+# Packages/cache
+*.nupkg
+*.snupkg
+packages/
+# OS junk
+.DS_Store
+Thumbs.db
+# Secrets / local-only config
+BudgetSystem.Api/appsettings.Local.json
