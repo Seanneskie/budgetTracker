@@ -35,6 +35,13 @@ public class ApiClient
     public async Task<int> CreateTransactionAsync(TransactionCreateDto dto)
     {
         var resp = await _http.PostAsJsonAsync("/api/v1/transactions", dto);
+    // Budgets
+    public async Task<List<BudgetVm>> GetBudgetsAsync()
+        => await _http.GetFromJsonAsync<List<BudgetVm>>("/api/v1/budgets") ?? new();
+
+    public async Task<int> CreateBudgetAsync(BudgetCreateDto dto)
+    {
+        var resp = await _http.PostAsJsonAsync("/api/v1/budgets", dto);
         if (!resp.IsSuccessStatusCode)
             throw new HttpRequestException($"Create failed: {(int)resp.StatusCode} {resp.ReasonPhrase}");
         var payload = await resp.Content.ReadFromJsonAsync<CreatedId>();
@@ -48,4 +55,6 @@ public class ApiClient
     public enum TransactionType { Income, Expense, Transfer }
     public record TransactionVm(int Id, DateTime Date, decimal Amount, TransactionType Type, string? Notes, int AccountId, int? CategoryId, int? FromAccountId, int? ToAccountId, DateTime CreatedUtc, DateTime? UpdatedUtc);
     public record TransactionCreateDto(DateTime Date, decimal Amount, TransactionType Type, int AccountId, int? CategoryId = null, int? FromAccountId = null, int? ToAccountId = null, string? Notes = null);
+    public record BudgetVm(int Id, int Year, int Month, decimal LimitAmount, int AccountId, int? CategoryId, DateTime CreatedUtc, DateTime? UpdatedUtc);
+    public record BudgetCreateDto(int Year, int Month, decimal LimitAmount, int AccountId, int? CategoryId);
 }
