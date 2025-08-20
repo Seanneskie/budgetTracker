@@ -54,3 +54,44 @@ button.accept-policy {
 }
 .input-group-text { min-width: 3rem; justify-content: center; }
 .text-danger.small { display:block; margin-top:.25rem; }
+
+
+/* Brand + active nav highlight */
+.navbar .navbar-brand { letter-spacing: .2px; }
+.navbar .nav-link.active {
+  position: relative;
+  font-weight: 600;
+}
+.navbar .nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -0.35rem;
+  height: 2px;
+  background: var(--bs-primary);
+  border-radius: 2px;
+  opacity: .9;
+}
+
+/* Button + focus polish */
+.btn-outline-primary.btn-sm { padding-inline: .75rem; }
+.form-control:focus, .form-select:focus, .btn:focus, .nav-link:focus {
+  box-shadow: 0 0 0 .2rem rgba(13,110,253,.15);
+}
+
+/* Containers and cards */
+.container .card {
+  border-radius: .75rem;
+  overflow: hidden;
+}
+
+/* Footer */
+footer { background-color: var(--bs-body-bg); }
+
+/* Optional: light “disabled” look for Swagger when no Api:BaseUrl */
+a.btn.disabled, a.btn[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: .5;
+}
+
+/* Optional: set a soft page background */
+body { background: #f7f8fb; }

@@ -17,76 +17,89 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BudgetSystem.Web</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BudgetSystem.Web.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <nav class="navbar navbar-expand-lg bg-body border-bottom shadow-sm">
         <div class="container">
-            <a class="navbar-brand" asp-area="" asp-page="/Index">BudgetSystem.Web</a>
+            <a class="navbar-brand fw-semibold" asp-area="" asp-page="/Index">
+                <span class="text-primary">Budget</span>System
+            </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
                     aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between" id="navbarMain">
-                <ul class="navbar-nav flex-grow-1">
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <!-- Left: main nav -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link text-dark @Active("/Index")" asp-area="" asp-page="/Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark @Active("/Accounts/Index")" asp-area="" asp-page="/Accounts/Index">Accounts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark @Active("/Categories/Index")" asp-area="" asp-page="/Categories/Index">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark @Active("/Transactions/Index")" asp-area="" asp-page="/Transactions/Index">Transactions</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark @Active("/Budgets/Index")" asp-area="" asp-page="/Budgets/Index">Budgets</a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav">
-                    <li class="nav-item ms-sm-3">
-                        <a class="nav-link @swaggerDisabled" href="@swaggerHref" target="_blank" rel="noopener">
-                            API Swagger
+                        <a class="nav-link @Active("/Index")" asp-area="" asp-page="/Index">
+                            Home
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark @Active("/Privacy")" asp-area="" asp-page="/Privacy">Privacy</a>
+                        <a class="nav-link @Active("/Accounts/Index")" asp-area="" asp-page="/Accounts/Index">
+                            Accounts
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @Active("/Categories/Index")" asp-area="" asp-page="/Categories/Index">
+                            Categories
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @Active("/Transactions/Index")" asp-area="" asp-page="/Transactions/Index">
+                            Transactions
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @Active("/Budgets/Index")" asp-area="" asp-page="/Budgets/Index">
+                            Budgets
+                        </a>
                     </li>
                 </ul>
+
+                <!-- Right: utilities -->
+                <div class="d-flex align-items-center gap-2">
+                    <a class="btn btn-outline-primary btn-sm @swaggerDisabled"
+                       href="@swaggerHref" target="_blank" rel="noopener"
+                       @(string.IsNullOrWhiteSpace(apiBase) ? "tabindex='-1' aria-disabled='true'" : "")>
+                        API Swagger
+                    </a>
+                    <a class="nav-link @Active("/Privacy")" asp-area="" asp-page="/Privacy">Privacy</a>
+                </div>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container">
+<div class="container flex-grow-1 py-3">
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
 </div>
 
-<footer class="border-top footer text-muted">
-    <div class="container">
-        &copy; @DateTime.UtcNow.Year - BudgetSystem.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+<footer class="border-top mt-auto">
+    <div class="container py-3 text-muted small d-flex justify-content-between align-items-center">
+        <span>&copy; @DateTime.UtcNow.Year BudgetSystem.Web</span>
+        <a asp-area="" asp-page="/Privacy" class="link-secondary text-decoration-none">Privacy</a>
     </div>
 </footer>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
-
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
