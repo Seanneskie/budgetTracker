@@ -3,28 +3,73 @@
 @{
     ViewData["Title"] = "Categories";
 }
-<h1 class="mt-3">Categories</h1>
 
-<p>
-    <a class="btn btn-primary" asp-page="Create">Create Category</a>
-</p>
+<div class="container py-3">
+  <div class="card shadow-sm border-0">
+    <div class="card-header d-flex justify-content-between align-items-center bg-white">
+      <h1 class="h5 mb-0">Categories</h1>
+      <a class="btn btn-primary btn-sm" asp-page="Create">Create Category</a>
+    </div>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Id</th><th>Name</th><th>Type</th><th>Account</th><th>Created</th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach (var c in Model.Categories)
+    @if (Model.Categories is null || !Model.Categories.Any())
     {
-        <tr>
-            <td>@c.Id</td>
-            <td>@c.Name</td>
-            <td>@c.Type</td>
-            <td>@c.AccountId</td>
-            <td>@c.CreatedUtc.ToLocalTime()</td>
-        </tr>
+        <div class="card-body text-center text-muted py-5">
+            <p class="mb-1 fw-semibold">No categories yet</p>
+            <p class="mb-3">Add your first category to organize transactions.</p>
+            <a class="btn btn-outline-primary btn-sm" asp-page="Create">Create Category</a>
+        </div>
     }
-    </tbody>
-</table>
+    else
+    {
+        <div class="table-responsive">
+          <table class="table table-hover table-sm align-middle mb-0">
+            <thead class="table-light sticky-head">
+              <tr>
+                <th style="width: 80px;">ID</th>
+                <th>Name</th>
+                <th style="width: 130px;">Type</th>
+                <th style="width: 160px;">Account</th>
+                <th style="width: 210px;">Created</th>
+              </tr>
+            </thead>
+            <tbody>
+            @foreach (var c in Model.Categories)
+            {
+                var type = c.Type?.ToString() ?? "";
+                var badgeClass = type.Equals("Expense", StringComparison.OrdinalIgnoreCase) ? "text-bg-danger"
+                               : type.Equals("Income", StringComparison.OrdinalIgnoreCase)  ? "text-bg-success"
+                               : "text-bg-secondary";
+
+                <tr>
+                    <td class="text-muted">@c.Id</td>
+                    <td class="fw-semibold">@c.Name</td>
+                    <td>
+                        <span class="badge @badgeClass">@type</span>
+                    </td>
+                    <td>
+                        @* If you have Account.Name available, show it. Otherwise show the ID as a subtle chip *@
+                        @if (!string.IsNullOrWhiteSpace(c.AccountName))
+                        {
+                            <span class="badge text-bg-light border">@c.AccountName</span>
+                        }
+                        else
+                        {
+                            <span class="badge text-bg-light border">#@c.AccountId</span>
+                        }
+                    </td>
+                    <td class="text-nowrap">
+                        @{
+                            var local = c.CreatedUtc.ToLocalTime();
+                        }
+                        <time title="@local.ToString("yyyy-MM-dd HH:mm:ss")">
+                            @local.ToString("MMM d, yyyy · h:mm tt")
+                        </time>
+                    </td>
+                </tr>
+            }
+            </tbody>
+          </table>
+        </div>
+    }
+  </div>
+</div>

@@ -20,7 +20,6 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
   background-color: var(--light-bg);
   color: var(--text-color);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -52,3 +51,20 @@ body {
   box-shadow: 0 0 0 0.1rem var(--light-bg), 0 0 0 0.25rem var(--accent-color);
 }
 
+
+
+/* Keep the header visible when scrolling long tables */
+.sticky-head { position: sticky; top: 0; z-index: 1; }
+
+/* Subtle card rounding/polish */
+.card { border-radius: .75rem; }
+.card-header { border-bottom: 1px solid var(--bs-border-color); }
+
+/* Improve numeric readability */
+.font-monospace { letter-spacing: .2px; }
+
+/* Make dates not wrap oddly */
+.text-nowrap { white-space: nowrap; }
+
+/* Tighten table row height a bit */
+.table > :not(caption) > * > * { padding-top: .6rem; padding-bottom: .6rem; }
