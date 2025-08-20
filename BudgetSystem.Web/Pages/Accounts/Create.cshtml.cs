@@ -9,7 +9,7 @@ public class CreateModel : PageModel
     private readonly ApiClient _api;
 
     [BindProperty]
-    public ApiClient.AccountCreateDto Form { get; set; } = new("", 0m);
+    public AccountFormModel Form { get; set; } = new();
 
     public CreateModel(ApiClient api)
     {
@@ -27,7 +27,8 @@ public class CreateModel : PageModel
             return Page();
         }
 
-        await _api.CreateAccountAsync(Form);
+        var dto = new ApiClient.AccountCreateDto(Form.Name, Form.StartingBalance, Form.Currency);
+        await _api.CreateAccountAsync(dto);
         return RedirectToPage("/Index");
     }
 }
