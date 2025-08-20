@@ -2,6 +2,7 @@ using BudgetSystem.Api.Endpoints;                 // endpoint modules (Map*Endpo
 using BudgetSystem.Api.Middleware;               // IdempotencyMiddleware
 using BudgetSystem.Infrastructure.Persistence;   // AppDbContext
 using BudgetSystem.Application.Validation;       // validators
+using BudgetSystem.Client;                       // ApiClient
 using FluentValidation;                          // FluentValidation services
 using FluentValidation.AspNetCore;               // automatic validation integration
 using Microsoft.AspNetCore.Diagnostics;          // exception handler feature

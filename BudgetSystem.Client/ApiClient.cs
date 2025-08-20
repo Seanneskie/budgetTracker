@@ -1,6 +1,6 @@
 using System.Net.Http.Json;
 
-namespace BudgetSystem.Web;
+namespace BudgetSystem.Client;
 
 /// <summary>
 /// Thin wrapper over <see cref="HttpClient"/> used by the razor pages to talk to the backend API.

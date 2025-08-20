@@ -1,3 +1,4 @@
+using BudgetSystem.Client;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BudgetSystem.Api.Pages;
