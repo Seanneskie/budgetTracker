@@ -13,11 +13,13 @@
 
     @if (Model.Categories is null || !Model.Categories.Any())
     {
-        <div class="card-body text-center text-muted py-5">
-            <p class="mb-1 fw-semibold">No categories yet</p>
-            <p class="mb-3">Add your first category to organize transactions.</p>
-            <a class="btn btn-outline-primary btn-sm" asp-page="Create">Create Category</a>
-        </div>
+        <tr>
+            <td>@c.Id</td>
+            <td>@c.Name</td>
+            <td>@c.Type</td>
+            <td>@c.AccountName</td>
+            <td>@c.CreatedUtc.ToLocalTime()</td>
+        </tr>
     }
     else
     {
