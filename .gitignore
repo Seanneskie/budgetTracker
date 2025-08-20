@@ -1,17 +1,83 @@
-# Build output
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Build outputs ---
 **/bin/
 **/obj/
-# VS/IDE
-.vs/
-.vscode/
-*.user
-*.suo
-# Packages/cache
+**/out/
+**/publish/
+artifacts/
+
+# --- Logs / coverage ---
+*.log
+logs/
+TestResults/
+*.coverage
+*.coveragexml
+coverage/
+coverage*.xml
+lcov.info
+
+# --- NuGet / packages ---
 *.nupkg
 *.snupkg
 packages/
-# OS junk
-.DS_Store
-Thumbs.db
-# Secrets / local-only config
+# (Keep the cache out)
+.nuget/
+
+# --- Visual Studio / Rider / VS Code ---
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+.idea/
+*.sln.iml
+_ReSharper.*
+/*.DotSettings.user
+
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# --- Tools caches ---
+*.VisualState.xml
+*.pidb
+*.svclog
+*.scc
+
+# --- Local secrets & env (keep real creds out of git) ---
+# User Secrets are stored outside the repo automatically, but ignore any local overrides:
 BudgetSystem.Api/appsettings.Local.json
+*.Development.local.json
+*.Local.json
+.env
+.env.*
+
+# --- Certificates (dev/test) ---
+*.pfx
+*.p12
+
+# --- SQL / LocalDB files (don’t commit local databases) ---
+*.mdf
+*.ldf
+*.ndf
+*.db
+
+# --- Static/site artifacts (if generated) ---
+wwwroot/dist/
+wwwroot/assets/
+
+# --- Node (if you later add a SPA) ---
+node_modules/
+dist/
+build/
+.cache/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
