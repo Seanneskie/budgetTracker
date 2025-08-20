@@ -4,26 +4,61 @@
     ViewData["Title"] = "Create Account";
 }
 
-<h1>Create Account</h1>
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white">
+          <h1 class="h5 mb-0">Create Account</h1>
+        </div>
 
-<form method="post">
-    <div class="mb-3">
-        <label asp-for="Form.Name" class="form-label"></label>
-        <input asp-for="Form.Name" class="form-control" />
-        <span asp-validation-for="Form.Name" class="text-danger"></span>
+        <div class="card-body">
+          <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+          <form method="post" novalidate>
+            <div class="mb-3">
+              <label asp-for="Form.Name" class="form-label">Account Name</label>
+              <input asp-for="Form.Name" class="form-control" placeholder="e.g., Operating Fund" />
+              <span asp-validation-for="Form.Name" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+              <label asp-for="Form.StartingBalance" class="form-label">Starting Balance</label>
+              <div class="input-group">
+                <span class="input-group-text" id="curPrefix">₱</span>
+                <input asp-for="Form.StartingBalance"
+                       class="form-control"
+                       type="number" step="0.01" min="0" aria-describedby="curPrefix"
+                       placeholder="0.00" />
+              </div>
+              <span asp-validation-for="Form.StartingBalance" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+              <label asp-for="Form.Currency" class="form-label">Currency</label>
+              <select asp-for="Form.Currency" class="form-select">
+                <option value="">Select currency</option>
+                <option value="PHP">PHP — Philippine Peso</option>
+                <option value="USD">USD — US Dollar</option>
+                <option value="EUR">EUR — Euro</option>
+              </select>
+              <span asp-validation-for="Form.Currency" class="text-danger small"></span>
+            </div>
+
+            <div class="d-flex gap-2">
+              <a asp-page="./Index" class="btn btn-outline-secondary">Cancel</a>
+              <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card-footer text-muted small">
+          Fields marked with errors must be fixed before submitting.
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-        <label asp-for="Form.StartingBalance" class="form-label"></label>
-        <input asp-for="Form.StartingBalance" class="form-control" />
-        <span asp-validation-for="Form.StartingBalance" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Form.Currency" class="form-label"></label>
-        <input asp-for="Form.Currency" class="form-control" />
-        <span asp-validation-for="Form.Currency" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-</form>
+  </div>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

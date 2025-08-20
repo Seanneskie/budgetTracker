@@ -46,3 +46,11 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+.card { border-radius: 0.75rem; }
+.card .form-label { font-weight: 600; }
+.form-control:focus, .form-select:focus {
+  box-shadow: 0 0 0 .2rem rgba(13,110,253,.15);
+}
+.input-group-text { min-width: 3rem; justify-content: center; }
+.text-danger.small { display:block; margin-top:.25rem; }
