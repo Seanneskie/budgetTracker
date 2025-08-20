@@ -3,10 +3,9 @@ using BudgetSystem.Api.Middleware;               // IdempotencyMiddleware
 using BudgetSystem.Infrastructure.Persistence;   // AppDbContext
 using BudgetSystem.Application.Validation;       // validators
 using FluentValidation;                          // FluentValidation services
+using FluentValidation.AspNetCore;               // automatic validation integration
 using Microsoft.AspNetCore.Diagnostics;          // exception handler feature
 using Microsoft.EntityFrameworkCore;
-using FluentValidation;
-using BudgetSystem.Application.Validation;
 
 var builder = WebApplication.CreateBuilder(args);
 

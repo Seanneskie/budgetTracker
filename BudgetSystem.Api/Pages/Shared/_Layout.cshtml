@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BudgetSystem.Api</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a asp-page="/Index">Home</a> |
+            <a asp-page="/Privacy">Privacy</a>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer>
+        &copy; @DateTime.Now.Year - BudgetSystem.Api
+    </footer>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

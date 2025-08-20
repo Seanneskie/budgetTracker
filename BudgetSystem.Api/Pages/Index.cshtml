@@ -1,0 +1,21 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Accounts";
+}
+
+<h1>Accounts</h1>
+
+@if (Model.Accounts.Count == 0)
+{
+    <p>No accounts available.</p>
+}
+else
+{
+    <ul>
+    @foreach (var acc in Model.Accounts)
+    {
+        <li>@acc.Name (@acc.Currency) - @acc.StartingBalance</li>
+    }
+    </ul>
+}
