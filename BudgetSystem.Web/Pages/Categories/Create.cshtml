@@ -1,0 +1,30 @@
+@page
+@model BudgetSystem.Web.Pages.Categories.CreateModel
+@{
+    ViewData["Title"] = "Create Category";
+}
+
+<h1>Create Category</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Form.Name" class="form-label"></label>
+        <input asp-for="Form.Name" class="form-control" />
+        <span asp-validation-for="Form.Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Form.Type" class="form-label"></label>
+        <select asp-for="Form.Type" class="form-select" asp-items="Html.GetEnumSelectList<ApiClient.TransactionType>()"></select>
+        <span asp-validation-for="Form.Type" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Form.AccountId" class="form-label"></label>
+        <input asp-for="Form.AccountId" class="form-control" />
+        <span asp-validation-for="Form.AccountId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
