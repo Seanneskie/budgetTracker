@@ -1,6 +1,8 @@
 using BudgetSystem.Api.Endpoints;                 // endpoint modules (Map*Endpoints)
 using BudgetSystem.Api.Middleware;               // IdempotencyMiddleware
 using BudgetSystem.Infrastructure.Persistence;   // AppDbContext
+using BudgetSystem.Application.Validation;       // validators
+using FluentValidation;                          // FluentValidation services
 using Microsoft.AspNetCore.Diagnostics;          // exception handler feature
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +18,10 @@ builder.Services.AddProblemDetails();
 // EF Core
 var conn = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(conn));
+
+// FluentValidation
+builder.Services.AddValidatorsFromAssemblyContaining<AccountCreateValidator>();
+builder.Services.AddFluentValidationAutoValidation();
 
 var app = builder.Build();
 
