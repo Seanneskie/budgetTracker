@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BudgetSystem.Application\BudgetSystem.Application.csproj" />
     <ProjectReference Include="..\BudgetSystem.Infrastructure\BudgetSystem.Infrastructure.csproj" />
+    <ProjectReference Include="..\BudgetSystem.Client\BudgetSystem.Client.csproj" />
   </ItemGroup>
 
 </Project>
