@@ -28,7 +28,7 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 navbar-main">
         <div class="container">
             <a class="navbar-brand" asp-area="" asp-page="/Index">BudgetSystem.Web</a>
 
@@ -40,19 +40,19 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between" id="navbarMain">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark @Active("/Index")" asp-area="" asp-page="/Index">Home</a>
+                        <a class="nav-link @Active("/Index")" asp-area="" asp-page="/Index">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark @Active("/Accounts/Index")" asp-area="" asp-page="/Accounts/Index">Accounts</a>
+                        <a class="nav-link @Active("/Accounts/Index")" asp-area="" asp-page="/Accounts/Index">Accounts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark @Active("/Categories/Index")" asp-area="" asp-page="/Categories/Index">Categories</a>
+                        <a class="nav-link @Active("/Categories/Index")" asp-area="" asp-page="/Categories/Index">Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark @Active("/Transactions/Index")" asp-area="" asp-page="/Transactions/Index">Transactions</a>
+                        <a class="nav-link @Active("/Transactions/Index")" asp-area="" asp-page="/Transactions/Index">Transactions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark @Active("/Budgets/Index")" asp-area="" asp-page="/Budgets/Index">Budgets</a>
+                        <a class="nav-link @Active("/Budgets/Index")" asp-area="" asp-page="/Budgets/Index">Budgets</a>
                     </li>
                 </ul>
 
@@ -63,7 +63,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark @Active("/Privacy")" asp-area="" asp-page="/Privacy">Privacy</a>
+                        <a class="nav-link @Active("/Privacy")" asp-area="" asp-page="/Privacy">Privacy</a>
                     </li>
                 </ul>
             </div>
@@ -77,7 +77,7 @@
     </main>
 </div>
 
-<footer class="border-top footer text-muted">
+<footer class="border-top footer footer-main">
     <div class="container">
         &copy; @DateTime.UtcNow.Year - BudgetSystem.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
     </div>
