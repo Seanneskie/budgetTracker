@@ -3,6 +3,8 @@ using BudgetSystem.Api.Middleware;               // IdempotencyMiddleware
 using BudgetSystem.Infrastructure.Persistence;   // AppDbContext
 using Microsoft.AspNetCore.Diagnostics;          // exception handler feature
 using Microsoft.EntityFrameworkCore;
+using FluentValidation;
+using BudgetSystem.Application.Validation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,9 @@ builder.Services.AddSwaggerGen();
 
 // RFC 7807 ProblemDetails
 builder.Services.AddProblemDetails();
+
+// FluentValidation
+builder.Services.AddValidatorsFromAssemblyContaining<TransactionCreateValidator>();
 
 // EF Core
 var conn = builder.Configuration.GetConnectionString("DefaultConnection");
